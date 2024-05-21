@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Game Rating Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://static.vecteezy.com/system/resources/previews/029/641/464/large_2x/a-chess-game-with-dark-clouds-background-generative-ai-photo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555555;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333333;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Board Game Rating Predictor</h1>
+        <form action="{{ url_for('predict') }}" method="post">
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <input type="text" id="type" name="type" required>
+            </div>
+            <div class="form-group">
+                <label for="yearpublished">Year Published:</label>
+                <input type="number" id="yearpublished" name="yearpublished" required>
+            </div>
+            <div class="form-group">
+                <label for="minplayers">Min Players:</label>
+                <input type="number" id="minplayers" name="minplayers" required>
+            </div>
+            <div class="form-group">
+                <label for="maxplayers">Max Players:</label>
+                <input type="number" id="maxplayers" name="maxplayers" required>
+            </div>
+            <div class="form-group">
+                <label for="playingtime">Playing Time:</label>
+                <input type="number" id="playingtime" name="playingtime" required>
+            </div>
+            <div class="form-group">
+                <label for="minplaytime">Min Play Time:</label>
+                <input type="number" id="minplaytime" name="minplaytime" required>
+            </div>
+            <div class="form-group">
+                <label for="maxplaytime">Max Play Time:</label>
+                <input type="number" id="maxplaytime" name="maxplaytime" required>
+            </div>
+            <div class="form-group">
+                <label for="minage">Min Age:</label>
+                <input type="number" id="minage" name="minage" required>
+            </div>
+            <div class="form-group">
+                <label for="users_rated">Users Rated:</label>
+                <input type="number" id="users_rated" name="users_rated" required>
+            </div>
+            <div class="form-group">
+                <label for="total_owners">Total Owners:</label>
+                <input type="number" id="total_owners" name="total_owners" required>
+            </div>
+            <div class="form-group">
+                <label for="total_traders">Total Traders:</label>
+                <input type="number" id="total_traders" name="total_traders" required>
+            </div>
+            <div class="form-group">
+                <label for="total_wanters">Total Wanters:</label>
+                <input type="number" id="total_wanters" name="total_wanters" required>
+            </div>
+            <div class="form-group">
+                <label for="total_wishers">Total Wishers:</label>
+                <input type="number" id="total_wishers" name="total_wishers" required>
+            </div>
+            <div class="form-group">
+                <label for="total_comments">Total Comments:</label>
+                <input type="number" id="total_comments" name="total_comments" required>
+            </div>
+            <div class="form-group">
+                <label for="total_weights">Total Weights:</label>
+                <input type="number" id="total_weights" name="total_weights" required>
+            </div>
+            <div class="form-group">
+                <label for="average_weight">Average Weight:</label>
+                <input type="number" step="0.01" id="average_weight" name="average_weight" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="result">
+            {% if prediction_text %}
+                <p>{{ prediction_text }}</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
